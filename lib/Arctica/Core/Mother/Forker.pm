@@ -103,7 +103,7 @@ sub new {
 		isArctica	=> 1, # Declare that this is a Arctica "something"
 		aobject_name	=> "MForker_Child",
 	};
-	
+
 	if (-x $dev_conf->{'exec_path'})  {
 		if ($dev_conf->{'exec_path'} =~ /^\//) {# Not M$ Windoz friendly... deal with that later...
 			$self->{'exec_path'} = $dev_conf->{'exec_path'};
@@ -114,7 +114,7 @@ sub new {
 	} else {
 		die("$dev_conf->{'exec_path'} is not executable!");
 	}
-	
+
 	if ($dev_conf->{'exec_cl_argv'}) {# add some sanity checks and whatnot here?
 		BugOUT(9,"Mother::Forker We got command line arguments for child!");
 		$self->{'exec_cl_argv'} = $dev_conf->{'exec_cl_argv'};
@@ -256,7 +256,7 @@ sub _afork_ipty {
 
 	# END OF THE FORKING CHILD
 	}
-	
+
 	if ($self->{'child_pid'} > 0) {
 		BugOUT(8,"Mother::Forker child PID is: $self->{'child_pid'}");
 		$self->{'glib_tnw'}{'reaper_of_zombie_children'} = Glib::Timeout->add(500, sub {\$self->_is_child_alive();}, undef, 1 );
@@ -308,7 +308,6 @@ sub _is_child_alive {# Idealy you should catch deaths before this do...
 		# insert the call for cleanup here too?
 	}
 }
-
 
 sub limpiador_de_la_muerte {
 	my $self = $_[0];
@@ -406,7 +405,6 @@ sub log_slurper {# create pipe we can declare as log file.
 		}
 	}
 }
-
 
 sub clargv_append {
 	my $self = $_[0];
@@ -522,19 +520,17 @@ sub cfg_file_init {
 						create		=> 0,
 					});
 				$self->_cfg_file_template_prep_vars($cfg_id,$options->{'vars'},1,0);
-				
+
 				if ($options->{'handle_cfg_change'}) {
 					$self->{'cfg_files'}{$cfg_id}{'handle_cfg_change'} = $options->{'handle_cfg_change'};
 				}
-				
+
 				return $cfg_id;
 
 			} else {
 				die("Mother::Forker '$options->{'template'}' does not appear to be a ACNFT file?!?");
 			}
-			
-			
-			 
+
 		} else {
 			die("Mother::Forker cfg template must be full path to existing file!");
 		}
@@ -592,7 +588,6 @@ sub _cfg_file_template_prep_vars {
 #				}# need to allow empty values
 			}
 
-
 		if (($writefile eq 1) and ($self->{'cfg_files'}{$cfg_id}{'file_path'} =~ /^\//)) {
 			my $template = $self->{'cfg_files'}{$cfg_id}{'template'};
 			foreach my $key (keys $self->{'cfg_files'}{$cfg_id}{'pdv'}) {
@@ -649,27 +644,27 @@ sub _chkncreatedir {
 	unless (-d $full_path) {
 		mkdir($full_path) or die("Could not create directory: '$full_path' ($!)");
 	}
-	
+
 	$full_path .= "/foobar";# This is probably where we would want to so something based on application class.
 	unless (-d $full_path) {
 		mkdir($full_path) or die("Could not create directory: '$full_path' ($!)");
 	}
-	
+
 	$full_path .= "/$arctica_core_object->{'AExecDeclaration'}{'self_aID'}.apd";
 	unless (-d $full_path) {
 		mkdir($full_path) or die("Could not create directory: '$full_path' ($!)");
 	}
-	
+
 	$full_path .= "/children";
 	unless (-d $full_path) {
 		mkdir($full_path) or die("Could not create directory: '$full_path' ($!)");
 	}
-	
+
 	$full_path .= "/$self->{'child_aid'}.cld";
 	unless (-d $full_path) {
 		mkdir($full_path) or die("Could not create directory: '$full_path' ($!)");
 	}
-	
+
 	if ($subdir eq "files") {
 		$full_path .= "/files/";
 		unless (-d $full_path) {
@@ -681,7 +676,7 @@ sub _chkncreatedir {
 			mkdir($full_path) or die("Could not create directory: '$full_path' ($!)");
 		}
 	}
-	
+
 	if (-d $full_path) {
 		return $full_path;
 	} else {
@@ -716,7 +711,6 @@ sub signal {
 		die("Mother::Forker signal '$signal' is invalid or not supported.");
 	}
 
-
 }
 
 sub ZombieSlayer {# This one may be usefull for external use too...
@@ -738,6 +732,5 @@ sub DESTROY {
 	my $self = $_[0];
 	warn("Mother::Forker DESTROY object $self->{'child_id'}");
 }
-
 
 1;
