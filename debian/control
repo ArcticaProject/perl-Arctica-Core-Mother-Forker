@@ -1,0 +1,24 @@
+Source: libarctica-core-mother-forker-perl
+Section: perl
+Priority: optional
+Build-Depends:
+ cdbs,
+ debhelper (>= 9),
+Build-Depends-Indep:
+ perl (>= 5.8.0),
+Maintainer: Arctica Project Developers <devs@lists.arctica-project.org>
+Uploaders:
+ Mike Gabriel <mike.gabriel@das-netzwerkteam.de>
+Homepage: https://arctica-project.org/
+Vcs-Git: https://github.com/ArcticaProject/perl-Arctica-Core-Mother-Forker
+Vcs-Browser: https://github.com/ArcticaProject/perl-Arctica-Core-Mother-Forker
+Standards-Version: 3.9.8
+
+Package: libarctica-core-mother-forker-perl
+Architecture: all
+Depends:
+ ${perl:Depends},
+ ${misc:Depends},
+Description: Arctica Framework for Fork and Control of external exec
+ .
+ FIXME: Some more descripttive text needs to go here...
