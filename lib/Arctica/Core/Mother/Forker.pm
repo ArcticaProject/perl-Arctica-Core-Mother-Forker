@@ -292,8 +292,8 @@ sub _afork_ipty {
 	}
 }
 
-sub _is_child_alive {# Idealy you should catch deaths before this do...
-	# Could this be done more effichient and pretty?
+sub _is_child_alive {# Ideally you should catch deaths before this do...
+	# Could this be done more efficient and pretty?
 	my $self = $_[0];
 	my $thekill = kill(0,$self->{'child_pid'});
 	if ($thekill > 0) {
