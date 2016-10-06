@@ -406,6 +406,20 @@ sub log_slurper {# create pipe we can declare as log file.
 	}
 }
 
+sub envset_append {
+	my $self = $_[0];
+	my $new_envvar_identifier = $_[1];
+	my $new_envvar_value = $_[2];
+	unless ( ($new_envvar_identifier =~ /^\s*$/) and ($new_envvar_value =~ /^\s*$/) ) {
+		unless (($self->{'dead'} eq 1) and ($self->{'child_pid'} > 0)) {
+			$self->{'env_set'}->{$new_envvar_identifier} = $new_envvar_value;
+		} else {
+			die("Mother::Forker Must append environment variable before exec!");
+		}
+	}
+}
+
+
 sub clargv_append {
 	my $self = $_[0];
 	my $new_clargv = $_[1];
