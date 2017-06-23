@@ -246,7 +246,7 @@ sub _afork_ipty {
 		}
 
 		if ($self->{'env_set'}) {
-			foreach my $key (keys $self->{'env_set'}) {
+			foreach my $key (keys %{$self->{'env_set'}}) {
 				$ENV{$key} =  $self->{'env_set'}{$key};
 			}
 		}
@@ -604,7 +604,7 @@ sub _cfg_file_template_prep_vars {
 
 		if (($writefile eq 1) and ($self->{'cfg_files'}{$cfg_id}{'file_path'} =~ /^\//)) {
 			my $template = $self->{'cfg_files'}{$cfg_id}{'template'};
-			foreach my $key (keys $self->{'cfg_files'}{$cfg_id}{'pdv'}) {
+			foreach my $key (keys %{$self->{'cfg_files'}{$cfg_id}{'pdv'}}) {
 				if ($template =~ /\$\$ACV\-$key\$\$/) {
 #					my $value = $decvars{$key}{'value'};
 #					print "FOUND MATCH: $1 $value\n";
