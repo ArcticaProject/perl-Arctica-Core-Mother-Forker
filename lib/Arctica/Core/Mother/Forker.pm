@@ -393,7 +393,7 @@ sub log_slurper {# create pipe we can declare as log file.
 	my $handler_function = $_[1];
 	if ($handler_function) {
 		unless (($self->{'dead'} eq 1) and ($self->{'child_pid'} > 0)) {
-			print "SLURP!!!!!!!!!!!!!! NOM NOM NOM.....\n";
+#			print "SLURP!!!!!!!!!!!!!! NOM NOM NOM.....\n";
 			my $pipe_path = $self->_create_pipe($handler_function);
 			if (-p  $pipe_path) {
 				return  $pipe_path;
@@ -425,7 +425,7 @@ sub clargv_append {
 	my $new_clargv = $_[1];
 	unless ($new_clargv =~ /^\s*$/) {
 		unless (($self->{'dead'} eq 1) and ($self->{'child_pid'} > 0)) {
-			push $self->{'exec_cl_argv'}, $new_clargv;
+			push @{$self->{'exec_cl_argv'}}, $new_clargv;
 		} else {
 			die("Mother::Forker Must append cl_argv before exec!");
 		}
@@ -582,7 +582,7 @@ sub _cfg_file_template_prep_vars {
 	my $writefile = $_[3];
 	my $trigger_call = $_[4];
 	if ($self->{'cfg_files'}{$cfg_id}{'template'}) {
-			foreach my $inv_key (keys $in_vars) {
+			foreach my $inv_key (keys %{$in_vars}) {
 #				if (length($in_vars->{$inv_key}) > 0) {# need to allow empty values
 				my $uc_key = uc($inv_key);
 				if ($self->{'cfg_files'}{$cfg_id}{'pdv'}{$uc_key}) {
