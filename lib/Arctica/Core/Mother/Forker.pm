@@ -744,6 +744,7 @@ sub ZombieSlayer {# This one may be usefull for external use too...
 
 sub DESTROY {
 	my $self = $_[0];
+	$self->signal(15);
 	warn("Mother::Forker DESTROY object $self->{'child_id'}");
 }
 
