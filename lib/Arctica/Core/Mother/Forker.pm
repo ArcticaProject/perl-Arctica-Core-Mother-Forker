@@ -253,6 +253,8 @@ sub _afork_ipty {
 #		DONE dealing with ENV here.
 
 		exec($self->{'exec_path'},@cl_args);
+		BugOUT(0, "Failed to execute " . $self->{'exec_path'} . " " . join(' ', @cl_args) . ": $!");
+		exit(1);
 
 	# END OF THE FORKING CHILD
 	}
